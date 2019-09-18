@@ -63,12 +63,14 @@ public class ListFavoriteAdapter extends RecyclerView.Adapter<ListFavoriteAdapte
         holder.tv_year.setText(favorite.getDate_available());
         holder.tv_rating.setText(String.valueOf(favorite.getVote_average()));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemClickCallback.onItemClicked(listFavorite.get(holder.getAdapterPosition()));
-            }
-        });
+        if (favorite.getType() == 0)
+        {
+            holder.tv_category.setText("Movie");
+        }
+        else if (favorite.getType() == 1)
+        {
+            holder.tv_category.setText("TV Show");
+        }
     }
 
     @Override
@@ -80,8 +82,7 @@ public class ListFavoriteAdapter extends RecyclerView.Adapter<ListFavoriteAdapte
     public class ListViewHolder extends RecyclerView.ViewHolder{
 
         ImageView img_poster;
-        TextView tv_rating, tv_year, tv_movie_name;
-        Button btnDelete;
+        TextView tv_rating, tv_year, tv_movie_name, tv_category;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,7 +91,8 @@ public class ListFavoriteAdapter extends RecyclerView.Adapter<ListFavoriteAdapte
             tv_rating = itemView.findViewById(R.id.tv_show_rating);
             tv_year = itemView.findViewById(R.id.tv_show_year);
             tv_movie_name = itemView.findViewById(R.id.tv_movie_title);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
+            tv_category = itemView.findViewById(R.id.tv_category);
+
         }
     }
 }
